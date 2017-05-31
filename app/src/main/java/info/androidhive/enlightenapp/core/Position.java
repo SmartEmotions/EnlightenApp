@@ -1,10 +1,9 @@
-package info.androidhive.materialtabs.core;
+package info.androidhive.enlightenapp.core;
 
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -14,8 +13,8 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 
-import info.androidhive.materialtabs.activity.MainScreen;
-import info.androidhive.materialtabs.activity.TabsScreen;
+import info.androidhive.enlightenapp.activity.MainScreen;
+import info.androidhive.enlightenapp.activity.TabsScreen;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

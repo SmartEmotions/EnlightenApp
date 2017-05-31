@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="info.androidhive.materialtabs" >
+    package="info.androidhive.enlightenapp" >
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MaterialTheme" >
-        <activity android:name=".activity.MainScreen"/>
+        <activity android:name="info.androidhive.enlightenapp.activity.MainScreen"/>
         <activity
-            android:name=".activity.SplashScreen"
+            android:name="info.androidhive.enlightenapp.activity.SplashScreen"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -18,9 +18,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.TabsScreen"
+            android:name="info.androidhive.enlightenapp.activity.TabsScreen"
             android:label="@string/title_activity_custom_view_icon_text_tabs"
-            android:parentActivityName=".activity.MainScreen" >
+            android:parentActivityName="info.androidhive.enlightenapp.activity.MainScreen" >
         </activity>
         <meta-data android:name="com.google.android.gms.version"/>
 

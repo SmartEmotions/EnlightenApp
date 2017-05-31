@@ -1,8 +1,7 @@
-package info.androidhive.materialtabs.core;
+package info.androidhive.enlightenapp.core;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -12,5 +11,5 @@ import retrofit2.http.Query;
 public interface DetailService
 {
     @GET("get.php?")
-    Call<Details> getDetail(@Query("code") String code);
+    Call<Detail> getDetail(@Query("code") String code);
 }

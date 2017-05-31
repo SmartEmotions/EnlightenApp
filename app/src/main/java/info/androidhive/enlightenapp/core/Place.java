@@ -1,4 +1,4 @@
-package info.androidhive.materialtabs.core;
+package info.androidhive.enlightenapp.core;
 
 import android.location.Location;
 import android.net.ParseException;
@@ -35,7 +35,6 @@ public class Place
         Location loc = new Location(name);
         try
         {
-
             loc.setLatitude(Double.parseDouble(latitude));
             loc.setLongitude(Double.parseDouble(longitude));
             return loc;

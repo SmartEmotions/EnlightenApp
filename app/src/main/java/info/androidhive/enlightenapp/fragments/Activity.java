@@ -1,4 +1,4 @@
-package info.androidhive.materialtabs.fragments;
+package info.androidhive.enlightenapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,14 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import info.androidhive.materialtabs.R;
+import info.androidhive.enlightenapp.R;
 
 
-public class Description extends Fragment
+public class Activity extends Fragment
 {
 
-    public Description()
+    public Activity()
     {
+        // Required empty public constructor
     }
 
     @Override
@@ -26,7 +27,7 @@ public class Description extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_description, container, false);
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
 }

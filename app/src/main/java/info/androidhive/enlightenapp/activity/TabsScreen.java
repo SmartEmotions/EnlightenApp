@@ -1,4 +1,4 @@
-package info.androidhive.materialtabs.activity;
+package info.androidhive.enlightenapp.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,25 +10,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import info.androidhive.materialtabs.R;
-import info.androidhive.materialtabs.core.Detail;
-import info.androidhive.materialtabs.core.DetailService;
-import info.androidhive.materialtabs.core.Details;
-import info.androidhive.materialtabs.fragments.Activity;
-import info.androidhive.materialtabs.fragments.Description;
-import info.androidhive.materialtabs.fragments.History;
+import info.androidhive.enlightenapp.core.Detail;
+import info.androidhive.enlightenapp.fragments.Activity;
+import info.androidhive.enlightenapp.fragments.Description;
+import info.androidhive.enlightenapp.fragments.History;
+import info.androidhive.enlightenapp.R;
+import info.androidhive.enlightenapp.core.DetailService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class TabsScreen extends AppCompatActivity
 {
@@ -36,7 +32,9 @@ public class TabsScreen extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private Details detail;
+    private TextView description, history, activities;
+    private Detail detail;
+    private String code;
     private boolean flag;
     public Retrofit jsonDetail;
 
@@ -44,6 +42,7 @@ public class TabsScreen extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        code = getIntent().getExtras().getString("Code");
         jsonDetail = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/webservices/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -81,38 +80,28 @@ public class TabsScreen extends AppCompatActivity
     public void loadDetail()
     {
         DetailService detailService = jsonDetail.create(DetailService.class);
-        Call<Details> call = detailService.getDetail(getIntent().getExtras().getString("Code"));
-        call.enqueue(new Callback<Details>()
+        Call<Detail> call = detailService.getDetail(code);
+        call.enqueue(new Callback<Detail>()
         {
             @Override
-            public void onResponse(Call<Details> call, Response<Details> response)
+            public void onResponse(Call<Detail> call, Response<Detail> response)
             {
                 detail = response.body();
+                activities = (TextView) findViewById(R.id.activities);
+                description = (TextView) findViewById(R.id.description);
+                history = (TextView) findViewById(R.id.history);
+                activities.setText(detail.getActivities());
+                description.setText(detail.getDescription());
+                //history.setText(detail.getHistory());
                 flag = true;
-                setDetail();
             }
 
             @Override
-            public void onFailure(Call<Details> call, Throwable t)
+            public void onFailure(Call<Detail> call, Throwable t)
             {
             }
         });
     }
-
-    public void setDetail()
-    {
-        TextView activityText = (TextView) findViewById(R.id.activities);
-        TextView descriptionText = (TextView) findViewById(R.id.description);
-        TextView historyText = (TextView) findViewById(R.id.history);
-        activityText.setText(detail.getDetail().getActivities());
-        descriptionText.setText(detail.getDetail().getDescription());
-        //historyText.setText(detail.getDetail().getHistory());
-    }
-
-    /**
-     * Adding fragments to ViewPager
-     * @param viewPager
-     */
     private void setupViewPager(ViewPager viewPager)
     {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

@@ -1,4 +1,4 @@
-package info.androidhive.materialtabs.activity;
+package info.androidhive.enlightenapp.activity;
 
 /**
  * Created by carlos on 12/05/17.
@@ -9,7 +9,7 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.view.WindowManager;
-import info.androidhive.materialtabs.R;
+import info.androidhive.enlightenapp.R;
 public class SplashScreen extends Activity
 {
     private final int DURACION_SPLASH = 3000; // 3 segundos

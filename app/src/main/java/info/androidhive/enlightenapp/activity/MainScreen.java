@@ -1,4 +1,4 @@
-package info.androidhive.materialtabs.activity;
+package info.androidhive.enlightenapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 import java.util.Timer;
 import java.util.TimerTask;
-import info.androidhive.materialtabs.R;
-import info.androidhive.materialtabs.core.Position;
+import info.androidhive.enlightenapp.R;
+import info.androidhive.enlightenapp.core.Position;
 
 public class MainScreen extends AppCompatActivity
 {

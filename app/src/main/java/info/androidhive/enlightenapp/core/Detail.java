@@ -1,4 +1,4 @@
-package info.androidhive.materialtabs.core;
+package info.androidhive.enlightenapp.core;
 
 import com.google.gson.annotations.SerializedName;
 
