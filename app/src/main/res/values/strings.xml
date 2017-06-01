@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Enlighten</string>
-    <string name="one">Descripcion</string>
-    <string name="three">Reseña</string>
-    <string name="two">Actividades</string>
-    <string name="btn_custom_icon_tabs">Ver Detalles</string>
-    <string name="title_activity_custom_view_icon_text_tabs">Place Information</string>
+    <string name="description">Descripcion</string>
+    <string name="history">Historia</string>
+    <string name="activities">Actividades</string>
+    <string name="see_details">Ver Detalles</string>
+    <string name="title_detail_activity">Place Information</string>
 
 </resources>

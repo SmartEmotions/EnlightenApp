@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="info.androidhive.enlightenapp.info.androidhive.enlightenapp.fragments.History">
+    tools:context="info.androidhive.enlightenapp.fragments.Activities">
 
     <TextView
         android:id="@+id/activities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/two"
+        android:text="@string/activities"
         android:textSize="40dp"
         android:textStyle="bold" />
 

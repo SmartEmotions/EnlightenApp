@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import info.androidhive.enlightenapp.R;
 
 
-public class Activity extends Fragment
+public class Activities extends Fragment
 {
 
-    public Activity()
+    public Activities()
     {
         // Required empty public constructor
     }
@@ -27,7 +27,7 @@ public class Activity extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        return inflater.inflate(R.layout.fragment_activities, container, false);
     }
 
 }

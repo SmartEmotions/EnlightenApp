@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -93,6 +94,7 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
                     break;
                 }
             }
+
         }
     }
 
@@ -120,6 +122,8 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
             public void onResponse(Call<Locations> call, Response<Locations> response)
             {
                 points = response.body();
+
+                Toast.makeText(context,points.getLocations().get(0).getName(), Toast.LENGTH_SHORT).show();
                 flag = true;
             }
 
@@ -127,7 +131,9 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
             public void onFailure(Call<Locations> call, Throwable t)
             {
                 flag = false;
+                Toast.makeText(context,"Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
+        Toast.makeText(context,"function finish", Toast.LENGTH_SHORT).show();
     }
 }

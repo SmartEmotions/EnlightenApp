@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name="info.androidhive.enlightenapp.activity.TabsScreen"
-            android:label="@string/title_activity_custom_view_icon_text_tabs"
+            android:label="@string/title_detail_activity"
             android:parentActivityName="info.androidhive.enlightenapp.activity.MainScreen" >
         </activity>
         <meta-data android:name="com.google.android.gms.version"/>

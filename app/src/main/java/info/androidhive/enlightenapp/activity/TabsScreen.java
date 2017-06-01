@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import info.androidhive.enlightenapp.core.Detail;
-import info.androidhive.enlightenapp.fragments.Activity;
+import info.androidhive.enlightenapp.fragments.Activities;
 import info.androidhive.enlightenapp.fragments.Description;
 import info.androidhive.enlightenapp.fragments.History;
 import info.androidhive.enlightenapp.R;
@@ -44,8 +44,9 @@ public class TabsScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         code = getIntent().getExtras().getString("Code");
         jsonDetail = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/webservices/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                                           .addConverterFactory(GsonConverterFactory.create())
+                                           .build();
+
         setContentView(R.layout.activity_details);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,7 +91,7 @@ public class TabsScreen extends AppCompatActivity
                 activities = (TextView) findViewById(R.id.activities);
                 description = (TextView) findViewById(R.id.description);
                 history = (TextView) findViewById(R.id.history);
-                activities.setText(detail.getActivities());
+                //activities.setText(detail.getActivities());
                 description.setText(detail.getDescription());
                 //history.setText(detail.getHistory());
                 flag = true;
@@ -107,7 +108,7 @@ public class TabsScreen extends AppCompatActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new Description(), "ONE");
         adapter.addFrag(new History(), "TWO");
-        adapter.addFrag(new Activity(), "THREE");
+        adapter.addFrag(new Activities(), "THREE");
         viewPager.setAdapter(adapter);
     }
 

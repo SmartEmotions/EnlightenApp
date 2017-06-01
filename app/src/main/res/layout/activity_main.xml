@@ -46,7 +46,7 @@
                 android:layout_width="281dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.37"
-                android:text="@string/btn_custom_icon_tabs"
+                android:text="@string/see_details"
                 android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>

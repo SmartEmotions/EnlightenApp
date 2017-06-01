@@ -1,0 +1,49 @@
+<form class="col s12" action="" method="POST" id="form_lugares" >
+	<div  class="container"  id="formu">
+		<div class="col s12" >
+			<h5 align="center"> Agregar un nuevo sitio </h5>
+			<div class="input-field col s6">
+			    <i class="fa fa-bank  fa-2x prefix"></i>
+			    <input id="nomPlace" name="nomPlace" type="text" class="validate">
+			    <label for="nomPlace"> Nombre </label>
+			</div>
+
+			<div class="input-field col s6">
+			    <i class="fa fa-location-arrow  fa-2x prefix"></i>
+				<input type="number"  id= "latitude"  name="latitude" type="text" class="validate">
+				<label for="latitude"> Latitud </label>
+			</div>
+
+			<div class="input-field col s6">
+			    <i class="fa fa-diamond  fa-2x prefix"></i>
+				<input type="number"  id= "longitude"  name="longitude" type="text" class="validate">
+				<label for="longitude"> Longitud </label>
+			</div>
+
+			<div class="input-field col s12">
+			    <i class="fa fa-book  fa-2x prefix"></i>
+				<textarea id="textarea1" name="description" class="materialize-textarea" > </textarea><br>
+				<label for="description"> Descripcion </label>
+			</div>
+
+			<div class="input-field col s12">
+			    <i class="fa fa-cogs  fa-2x prefix"></i>
+				<textarea id="textarea1" name="history" class="materialize-textarea"> </textarea><br>
+				<label for="history"> Reseña Historica </label>
+			</div>
+
+			<div class="input-field col s12">
+			    <i class="fa fa-group fa-2x prefix"></i>
+				<textarea id="textarea1" name="activities" class="materialize-textarea"> </textarea><br>
+				<label for="activities"> Actividades por realizar </label>
+			</div>
+
+			<div align="center" class="input-field col s12"> <br>
+				<button class="btn waves-effect waves-light" id="enviar" type="button" name=""
+				onclick="insertPlace()"> Agregar
+				</button>
+			</div>
+
+		</div>
+	</div>
+</form>
