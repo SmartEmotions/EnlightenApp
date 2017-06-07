@@ -30,32 +30,34 @@ import static java.lang.Math.round;
 
 public class Position implements GoogleApiClient.ConnectionCallbacks,
                                  GoogleApiClient.OnConnectionFailedListener,
-                                 LocationListener
-{
+                                 LocationListener {
     private final String TAG = "TestApp";
     private LocationRequest locRequest;
     private GoogleApiClient apiClient;
     private Locations points;
     private boolean flag;
-    public Retrofit jsonService;
+    public Retrofit jsonService, jsonDetail;
     public MainScreen context;
 
 
-    public Position(MainScreen main)
-    {
+    public Position(MainScreen main) {
         context = main;
         flag = false;
         jsonService = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/")
-                                            .addConverterFactory(GsonConverterFactory.create())
-                                            .build();
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonDetail = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/webservices/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         loadLocations();
         apiClient = new GoogleApiClient.Builder(context)
-                                       .addApi(LocationServices.API)
-                                       .addConnectionCallbacks(this)
-                                       .addOnConnectionFailedListener(this)
-                                       .build();
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
         apiClient.connect();
     }
+
     @Override
     public void onConnected(Bundle bundle)
     {
@@ -72,30 +74,49 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult)
-    {
+    public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.i(TAG, "La conexión de GPS falló");
     }
 
     @Override
-    public void onLocationChanged(Location location)
-    {
-        if (flag)
-        {
+    public void onLocationChanged(Location location) {
+        if (flag) {
+            Place closer;
+            double distance;
             ArrayList<Place> places = points.getLocations();
-            for (int i = 0 ; i < places.size() ; i++)
-            {
-                double distance = round(location.distanceTo(places.get(i).getLocation()));
-                if (distance < 50)
-                {
-                    Intent details = new Intent(new Intent(context, TabsScreen.class));
-                    details.putExtra("Code", places.get(i).getId());
-                    context.startActivity(details);
+            for (int i = 0; i < places.size(); i++) {
+                distance = round(location.distanceTo(places.get(i).getLocation()));
+                if (distance < 50) {
+                    getDetail(places.get(i));
                     break;
                 }
             }
 
+
         }
+    }
+
+    public void getDetail(Place place)
+    {
+        DetailService detailService = jsonDetail.create(DetailService.class);
+        Call<Detail> call = detailService.getDetail(place.getId());
+        call.enqueue(new Callback<Detail>()
+        {
+            @Override
+            public void onResponse(Call<Detail> call, Response<Detail> response)
+            {
+                Intent details = new Intent(new Intent(context, TabsScreen.class));
+                details.putExtra("Descripcion", response.body().getDescription());
+                details.putExtra("Historia", response.body().getHistory());
+                details.putExtra("Actividades", response.body().getActivities());
+                context.startActivity(details);
+            }
+
+            @Override
+            public void onFailure(Call<Detail> call, Throwable t)
+            {
+            }
+        });
     }
 
     public void disconnect()
@@ -110,9 +131,6 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
 
     public void loadLocations()
     {
-        /*final Retrofit retrofit = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();*/
         LocationService service = jsonService.create(LocationService.class);
         Call<Locations> call = service.getLocations();
 
@@ -122,8 +140,6 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
             public void onResponse(Call<Locations> call, Response<Locations> response)
             {
                 points = response.body();
-
-                Toast.makeText(context,points.getLocations().get(0).getName(), Toast.LENGTH_SHORT).show();
                 flag = true;
             }
 
@@ -131,9 +147,7 @@ public class Position implements GoogleApiClient.ConnectionCallbacks,
             public void onFailure(Call<Locations> call, Throwable t)
             {
                 flag = false;
-                Toast.makeText(context,"Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
-        Toast.makeText(context,"function finish", Toast.LENGTH_SHORT).show();
     }
 }

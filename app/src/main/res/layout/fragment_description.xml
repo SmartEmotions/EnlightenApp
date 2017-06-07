@@ -5,11 +5,11 @@
     tools:context="info.androidhive.enlightenapp.fragments.Description">
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/descriptiontextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/description"
-        android:textSize="40dp"
+        android:textSize="25dp"
+        android:gravity="center"
         android:textStyle="bold"
         android:layout_centerInParent="true"/>
 </RelativeLayout>

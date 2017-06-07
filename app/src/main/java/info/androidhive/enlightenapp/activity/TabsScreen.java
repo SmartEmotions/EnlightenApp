@@ -8,11 +8,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import info.androidhive.enlightenapp.core.Detail;
 import info.androidhive.enlightenapp.fragments.Activities;
@@ -20,6 +24,7 @@ import info.androidhive.enlightenapp.fragments.Description;
 import info.androidhive.enlightenapp.fragments.History;
 import info.androidhive.enlightenapp.R;
 import info.androidhive.enlightenapp.core.DetailService;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,9 +37,11 @@ public class TabsScreen extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TextView description, history, activities;
     private Detail detail;
     private String code;
+    private Activities activitiesFrag;
+    private Description descriptionFrag;
+    private History historyFrag;
     private boolean flag;
     public Retrofit jsonDetail;
 
@@ -42,12 +49,19 @@ public class TabsScreen extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        code = getIntent().getExtras().getString("Code");
-        jsonDetail = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/webservices/")
-                                           .addConverterFactory(GsonConverterFactory.create())
-                                           .build();
-
         setContentView(R.layout.activity_details);
+        activitiesFrag = new Activities();
+        descriptionFrag = new Description();
+        historyFrag = new History();
+
+        historyFrag.setTextDescription(getIntent().getExtras().getString("Historia"));
+        descriptionFrag.setTextDescription(getIntent().getExtras().getString("Descripcion"));
+        activitiesFrag.setTextDescription(getIntent().getExtras().getString("Actividades"));
+        //code = getIntent().getExtras().getString("Descripcion");
+        //jsonDetail = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/webservices/")
+        //                                   .addConverterFactory(GsonConverterFactory.create())
+        //                                   .build();
+        //loadDetail();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -56,12 +70,11 @@ public class TabsScreen extends AppCompatActivity
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-        loadDetail();
+
     }
 
     private void setupTabIcons()
     {
-
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabOne.setText("Description");
         tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_description, 0, 0);
@@ -78,8 +91,12 @@ public class TabsScreen extends AppCompatActivity
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }
 
+    /*
+
     public void loadDetail()
     {
+
+
         DetailService detailService = jsonDetail.create(DetailService.class);
         Call<Detail> call = detailService.getDetail(code);
         call.enqueue(new Callback<Detail>()
@@ -88,12 +105,9 @@ public class TabsScreen extends AppCompatActivity
             public void onResponse(Call<Detail> call, Response<Detail> response)
             {
                 detail = response.body();
-                activities = (TextView) findViewById(R.id.activities);
-                description = (TextView) findViewById(R.id.description);
-                history = (TextView) findViewById(R.id.history);
-                //activities.setText(detail.getActivities());
-                description.setText(detail.getDescription());
-                //history.setText(detail.getHistory());
+                historyFrag.setTextDescription(detail.getHistory());
+                descriptionFrag.setTextDescription(detail.getDescription());
+                activitiesFrag.setTextDescription(detail.getActivities());
                 flag = true;
             }
 
@@ -103,12 +117,14 @@ public class TabsScreen extends AppCompatActivity
             }
         });
     }
+
+    */
     private void setupViewPager(ViewPager viewPager)
     {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new Description(), "ONE");
-        adapter.addFrag(new History(), "TWO");
-        adapter.addFrag(new Activities(), "THREE");
+        adapter.addFrag(descriptionFrag, "ONE");
+        adapter.addFrag(historyFrag, "TWO");
+        adapter.addFrag(activitiesFrag, "THREE");
         viewPager.setAdapter(adapter);
     }
 

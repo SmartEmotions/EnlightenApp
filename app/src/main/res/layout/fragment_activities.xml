@@ -5,12 +5,12 @@
     tools:context="info.androidhive.enlightenapp.fragments.Activities">
 
     <TextView
-        android:id="@+id/activities"
+        android:id="@+id/activitiestextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/activities"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
