@@ -50,6 +50,8 @@ public class TabsScreen extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+
         activitiesFrag = new Activities();
         descriptionFrag = new Description();
         historyFrag = new History();
@@ -57,11 +59,7 @@ public class TabsScreen extends AppCompatActivity
         historyFrag.setTextDescription(getIntent().getExtras().getString("Historia"));
         descriptionFrag.setTextDescription(getIntent().getExtras().getString("Descripcion"));
         activitiesFrag.setTextDescription(getIntent().getExtras().getString("Actividades"));
-        //code = getIntent().getExtras().getString("Descripcion");
-        //jsonDetail = new Retrofit.Builder().baseUrl("http://seminarioapp.dx.am/webservices/")
-        //                                   .addConverterFactory(GsonConverterFactory.create())
-        //                                   .build();
-        //loadDetail();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,34 +89,7 @@ public class TabsScreen extends AppCompatActivity
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }
 
-    /*
 
-    public void loadDetail()
-    {
-
-
-        DetailService detailService = jsonDetail.create(DetailService.class);
-        Call<Detail> call = detailService.getDetail(code);
-        call.enqueue(new Callback<Detail>()
-        {
-            @Override
-            public void onResponse(Call<Detail> call, Response<Detail> response)
-            {
-                detail = response.body();
-                historyFrag.setTextDescription(detail.getHistory());
-                descriptionFrag.setTextDescription(detail.getDescription());
-                activitiesFrag.setTextDescription(detail.getActivities());
-                flag = true;
-            }
-
-            @Override
-            public void onFailure(Call<Detail> call, Throwable t)
-            {
-            }
-        });
-    }
-
-    */
     private void setupViewPager(ViewPager viewPager)
     {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

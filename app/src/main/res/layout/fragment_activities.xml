@@ -11,6 +11,8 @@
         android:textSize="25dp"
         android:gravity="center"
         android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

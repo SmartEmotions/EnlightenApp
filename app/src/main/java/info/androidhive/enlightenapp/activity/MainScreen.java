@@ -39,9 +39,8 @@ public class MainScreen extends AppCompatActivity
         {
             public void onClick(View v)
             {
-                Intent details = new Intent(new Intent(MainScreen.this, TabsScreen.class));
-                details.putExtra("Code", "27");
-                startActivity(details);
+                Intent about = new Intent(new Intent(MainScreen.this, AboutScreen.class));
+                startActivity(about);
             }
         });
         slider.setFactory(new ViewSwitcher.ViewFactory()
